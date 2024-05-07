@@ -1,9 +1,12 @@
-import Image from "next/image";
+import Hero from '../components/Hero';
+import InfoBoxes from '@/components/InfoBoxes';
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <main>
-      main
-    </main>
+    <>
+      <Hero />
+      <InfoBoxes />
+    </>
   );
-}
+};
+export default HomePage;
