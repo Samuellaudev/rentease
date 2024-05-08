@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaBed, FaBath, FaRulerCombined, FaMoneyBill } from 'react-icons/fa';
-import { Property } from '@/components/Properties/property.type';
+import { PropertyModel } from '@/models/Property';
 
 interface PropertyProp {
-  property: Property
+  property: PropertyModel
 }
 
 const PropertyCard = ({ property }: PropertyProp) => {

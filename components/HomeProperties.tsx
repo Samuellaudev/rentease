@@ -1,11 +1,17 @@
+import connectDB from '@/config/db';
+import Property from '@/models/Property';
+import { PropertyModel } from '@/models/Property';
+
 import Link from 'next/link';
-import properties from '@/properties.json';
 import PropertyCard from './Properties/PropertyCard';
 
-const HomeProperties = () => {
-  const recentProperties = properties
-    .sort(() => Math.random() - Math.random())
-    .slice(0, 3);
+const HomeProperties = async () => {
+  await connectDB()
+
+  const recentProperties: PropertyModel[] = await Property.find({})
+    .sort({ createdAt: -1 })
+    .limit(3)
+    .lean()
 
   return (
     <>
@@ -19,7 +25,7 @@ const HomeProperties = () => {
               <p>No Properties Found</p>
             ) : (
               recentProperties.map((property) => (
-                <PropertyCard key={ property._id } property={ property } />
+                <PropertyCard key={ property._id.toString() } property={ property } />
               ))
             ) }
           </div>
