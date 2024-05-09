@@ -2,7 +2,6 @@ import { Schema, model, models, Types } from 'mongoose';
 import { Location, Rates, SellerInfo } from '@/types/property.type'
 
 export interface PropertyModel {
-  _id: string | Types.ObjectId;
   owner: string | Types.ObjectId;
   name: string;
   type: string;
@@ -22,9 +21,6 @@ export interface PropertyModel {
 
 const PropertySchema = new Schema<PropertyModel>(
   {
-    _id: {
-      type: Schema.Types.ObjectId,
-    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'User',
