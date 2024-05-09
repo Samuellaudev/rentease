@@ -2,9 +2,38 @@
 
 import connectDB from '@/config/db';
 import Property from '@/models/Property';
+import cloudinary from '@/config/cloudinary'
 import { getSessionUser } from '@/utils/getSessionUser';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+
+interface PropertyData {
+  type: FormDataEntryValue | null;
+  name: FormDataEntryValue | null;
+  description: FormDataEntryValue | null;
+  location: {
+    street: FormDataEntryValue | null;
+    city: FormDataEntryValue | null;
+    state: FormDataEntryValue | null;
+    zipcode: FormDataEntryValue | null;
+  };
+  beds: FormDataEntryValue | null;
+  baths: FormDataEntryValue | null;
+  square_feet: FormDataEntryValue | null;
+  amenities: FormDataEntryValue[];
+  rates: {
+    weekly: FormDataEntryValue | null;
+    monthly: FormDataEntryValue | null;
+    nightly: FormDataEntryValue | null;
+  };
+  seller_info: {
+    name: FormDataEntryValue | null;
+    email: FormDataEntryValue | null;
+    phone: FormDataEntryValue | null;
+  };
+  owner: string;
+  images?: string[]; // Add the images property here
+}
 
 async function addProperty(formData: FormData) {
   await connectDB();
@@ -19,10 +48,13 @@ async function addProperty(formData: FormData) {
 
   // Access all values for amenities and images
   const amenities = formData.getAll('amenities');
-  const images: string[] = formData.getAll('images').filter((image: string) => image.name !== '');  
+
+  const images: FormDataEntryValue[] = formData.getAll('images');
+  // Filter out any empty strings for Cloudinary
+  const filteredImages: FormDataEntryValue[] = images.filter((image) => image && typeof image === 'object');
 
   // Create the propertyData object with embedded seller_info
-  const propertyData = {
+  const propertyData: PropertyData = {
     type: formData.get('type'),
     name: formData.get('name'),
     description: formData.get('description'),
@@ -48,6 +80,34 @@ async function addProperty(formData: FormData) {
     },
     owner: userId
   };
+
+  // Access the uploaded files from the form data
+  const imageUrls = [];
+
+  for (const imageFile of filteredImages) {
+    // Assuming image is a File object, extract the file data
+    let imageBuffer: ArrayBuffer;
+    if (!(imageFile instanceof File)) return
+    
+    imageBuffer = await imageFile.arrayBuffer();
+    const imageArray = Array.from(new Uint8Array(imageBuffer));
+    const imageData = Buffer.from(imageArray);
+
+    // Convert the image data to base64
+    const imageBase64 = imageData.toString('base64');
+
+    // Upload the image data as a base64 string to Cloudinary
+    const result = await cloudinary.uploader.upload(
+      `data:image/png;base64,${ imageBase64 }`,
+      {
+        folder: 'RentEase',
+      }
+    );
+
+    imageUrls.push(result.secure_url);
+  }
+
+  propertyData.images = imageUrls;
 
   const newProperty = new Property(propertyData);
   await newProperty.save();

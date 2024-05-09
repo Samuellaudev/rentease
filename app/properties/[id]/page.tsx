@@ -8,6 +8,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import PropertyHeaderImage from '@/components/Properties/PropertyHeaderImage';
 import PropertyDetails from '@/components/Properties/PropertyDetails';
+import PropertyImages from '@/components/Properties/PropertyImages';
 
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
   await connectDB();
@@ -49,6 +50,7 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </section>
+      <PropertyImages images={property.images} />
     </>
   )
 }
