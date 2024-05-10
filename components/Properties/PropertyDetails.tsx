@@ -1,4 +1,4 @@
-import { PropertyModel } from '@/models/Property';
+import { PropertyType } from '@/types/property.type';
 import {
   FaBed,
   FaBath,
@@ -10,7 +10,7 @@ import {
 // import PropertyMap from './PropertyMap';
 
 interface PropertyProps {
-  property: PropertyModel
+  property: PropertyType
 }
 
 const PropertyDetails = ({ property }: PropertyProps) => {

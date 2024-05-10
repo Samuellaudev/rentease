@@ -1,6 +1,6 @@
 import connectDB from '@/config/db';
 import Property from '@/models/Property';
-import { PropertyModel } from '@/models/Property';
+import { PropertyType } from '@/types/property.type';
 import { convertToSerializeableObject } from '@/utils/convertToObject';
 
 import Link from 'next/link';
@@ -13,7 +13,7 @@ import PropertyImages from '@/components/Properties/PropertyImages';
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
   await connectDB();
 
-  const propertyDoc: PropertyModel | null = await Property.findById(params.id).lean();
+  const propertyDoc: PropertyType | null = await Property.findById(params.id).lean();
 
   if (!propertyDoc) {
     return (
@@ -23,7 +23,7 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
     );
   }
 
-  const property = convertToSerializeableObject(propertyDoc) as PropertyModel;
+  const property = convertToSerializeableObject(propertyDoc) as PropertyType;
 
   return (
     <>

@@ -1,6 +1,6 @@
 import connectDB from '@/config/db';
 import Property from '@/models/Property';
-import { PropertyModel } from '@/models/Property';
+import { PropertyType } from '@/types/property.type';
 
 import Link from 'next/link';
 import PropertyCard from './Properties/PropertyCard';
@@ -8,7 +8,7 @@ import PropertyCard from './Properties/PropertyCard';
 const HomeProperties = async () => {
   await connectDB()
 
-  const recentProperties: PropertyModel[] = await Property.find({})
+  const recentProperties: PropertyType[] = await Property.find({})
     .sort({ createdAt: -1 })
     .limit(3)
     .lean()
@@ -25,7 +25,7 @@ const HomeProperties = async () => {
               <p>No Properties Found</p>
             ) : (
               recentProperties.map((property) => (
-                <PropertyCard key={ property._id.toString() } property={ property } />
+                <PropertyCard key={ property._id } property={ property } />
               ))
             ) }
           </div>
