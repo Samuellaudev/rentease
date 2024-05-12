@@ -1,11 +1,14 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+
+import checkBookmarkStatus from '@/app/actions/bookmark/checkBookmarkStatus';
+import bookmarkProperty from '@/app/actions/bookmark/bookmarkProperty';
+import { PropertyType } from '@/types/property.type';
+
 import { toast } from 'react-toastify';
 import { FaBookmark } from 'react-icons/fa';
-// import checkBookmarkStatus from '@/app/actions/checkBookmarkStatus';
-import bookmarkProperty from '@/app/actions/bookmarkProperty';
-import { PropertyType } from '@/types/property.type';
 
 interface PropertyProps {
   property: PropertyType
@@ -16,7 +19,19 @@ const BookmarkButton = ({ property }: PropertyProps) => {
   const userId: string | undefined = session?.user?.id
 
   const [isBookmarked, setIsBookmarked] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) {
+      setLoading(false);
+      return;
+    }
+
+    checkBookmarkStatus(property._id).then((res) => {
+      if (res.isBookmarked) setIsBookmarked(res.isBookmarked);
+      setLoading(false);
+    });
+  }, [property._id, userId]);
 
   const handleClick = async () => {
     if (!userId) {
@@ -31,7 +46,7 @@ const BookmarkButton = ({ property }: PropertyProps) => {
     });
   };
 
-  // if (loading) return <p className='text-center'>Loading...</p>;
+  if (loading) return <p className='text-center'>Loading...</p>;
 
   return isBookmarked ? (
     <button
