@@ -11,7 +11,7 @@ export const getSessionUser = async () => {
 
     return {
       user: session.user,
-      userId: session.user.id,
+      userId: session.user.id as string,
     };
   } catch (error) {
     console.error(error);
