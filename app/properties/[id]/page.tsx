@@ -14,6 +14,10 @@ import BookmarkButton from '@/components/Properties/BookmarkButton';
 import ShareButtons from '@/components/Properties/ShareButtons';
 
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
+  const PUBLIC_DOMAIN = process.env.VERCEL_URL
+    ? `https://${ process.env.VERCEL_URL }`
+    : 'http://localhost:3000';
+
   await connectDB();
 
   const propertyDoc: PropertyType | null = await Property.findById(params.id).lean();
@@ -46,14 +50,14 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
           <div className='grid grid-cols-1 md:grid-cols-70/30 w-full gap-6'>
             <PropertyDetails property={ property } />
             <aside className='space-y-4'>
-              <BookmarkButton property={property} />
-              <ShareButtons property={ property } />
-              <PropertyContactForm property={property} />
+              <BookmarkButton property={ property } />
+              <ShareButtons property={ property } PUBLIC_DOMAIN={ PUBLIC_DOMAIN } />
+              <PropertyContactForm property={ property } />
             </aside>
           </div>
         </div>
       </section>
-      <PropertyImages images={property.images} />
+      <PropertyImages images={ property.images } />
     </>
   )
 }
