@@ -9,6 +9,9 @@ import { FaArrowLeft } from 'react-icons/fa';
 import PropertyHeaderImage from '@/components/Properties/PropertyHeaderImage';
 import PropertyDetails from '@/components/Properties/PropertyDetails';
 import PropertyImages from '@/components/Properties/PropertyImages';
+import PropertyContactForm from '@/components/Properties/PropertyContactForm';
+import BookmarkButton from '@/components/Properties/BookmarkButton';
+import ShareButtons from '@/components/Properties/ShareButtons';
 
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
   await connectDB();
@@ -42,11 +45,11 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
         <div className='container m-auto py-10 px-6'>
           <div className='grid grid-cols-1 md:grid-cols-70/30 w-full gap-6'>
             <PropertyDetails property={ property } />
-            {/* <aside className='space-y-4'>
+            <aside className='space-y-4'>
               <BookmarkButton property={property} />
-              <ShareButtons property={ property } PUBLIC_DOMAIN={ PUBLIC_DOMAIN } />
+              <ShareButtons property={ property } />
               <PropertyContactForm property={property} />
-            </aside> */}
+            </aside>
           </div>
         </div>
       </section>
