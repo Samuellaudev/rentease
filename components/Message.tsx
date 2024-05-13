@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { MessageType } from '@/types/message.type';
 import markMessageAsRead from '@/app/actions/message/markMessageAsRead';
+import deleteMessage from '@/app/actions/message/deleteMessage';
 import { toast } from 'react-toastify';
 
 interface MessageProp {
@@ -11,6 +12,7 @@ interface MessageProp {
 
 const MessageCard = ({ message }: MessageProp) => {
   const [isRead, setIsRead] = useState(message.read);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const handleReadClick = async () => {
     const read = await markMessageAsRead(message._id);
@@ -18,6 +20,17 @@ const MessageCard = ({ message }: MessageProp) => {
     setIsRead(read);
     toast.success(`Marked as ${read ? 'read' : 'new'}`);
   };
+
+  const handleDeleteClick = async () => {
+    await deleteMessage(message._id);
+
+    setIsDeleted(true);
+    toast.success('Message Deleted');
+  };
+
+  if (isDeleted) {
+    return <p>Deleted message</p>;
+  }
 
   return (
     <div className='relative bg-white p-4 rounded-md shadow-md border border-gray-200'>
@@ -63,7 +76,7 @@ const MessageCard = ({ message }: MessageProp) => {
         {isRead ? 'Mark As New' : 'Mark As Read'}
       </button>
       <button
-        // onClick={handleDeleteClick}
+        onClick={handleDeleteClick}
         className='mt-4 bg-red-500 text-white py-1 px-3 rounded-md'
       >
         Delete
