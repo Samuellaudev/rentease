@@ -1,4 +1,5 @@
 import AuthProvider from '@/components/AuthProvider';
+import { GlobalProvider } from '@/contexts/GlobalContext';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from '@/components/Navbar';
@@ -21,14 +22,16 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang="en">
-        <body className={ inter.className }>
-          <Navbar />
-          <main>{ children }</main>
-          <Footer />
-          <ToastContainer />
-        </body>
-      </html>
+      <GlobalProvider>
+        <html lang="en">
+          <body className={ inter.className }>
+            <Navbar />
+            <main>{ children }</main>
+            <Footer />
+            <ToastContainer />
+          </body>
+        </html>
+      </GlobalProvider>
     </AuthProvider>
   );
 }
