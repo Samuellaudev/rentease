@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { MessageType } from '@/types/message.type';
+import markMessageAsRead from '@/app/actions/message/markMessageAsRead';
+import { toast } from 'react-toastify';
 
 interface MessageProp {
   message: MessageType
@@ -9,6 +11,13 @@ interface MessageProp {
 
 const MessageCard = ({ message }: MessageProp) => {
   const [isRead, setIsRead] = useState(message.read);
+
+  const handleReadClick = async () => {
+    const read = await markMessageAsRead(message._id);
+
+    setIsRead(read);
+    toast.success(`Marked as ${read ? 'read' : 'new'}`);
+  };
 
   return (
     <div className='relative bg-white p-4 rounded-md shadow-md border border-gray-200'>
@@ -46,7 +55,7 @@ const MessageCard = ({ message }: MessageProp) => {
         </li>
       </ul>
       <button
-        // onClick={handleReadClick}
+        onClick={handleReadClick}
         className={`mt-4 mr-3 ${
           isRead ? 'bg-gray-300' : 'bg-blue-500 text-white'
         } py-1 px-3 rounded-md`}

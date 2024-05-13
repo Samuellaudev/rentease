@@ -23,13 +23,20 @@ const MessagesPage = async () => {
   const unreadMessages = await Message.find({
     recipient: userId,
     read: false
-  }).sort({ createdAt: -1 }) // Sort read messages in asc order
+  }).sort({ createdAt: -1 })
     .populate('sender', 'username')
     .populate('property', 'name')
     .lean();
 
-  // const messages = [...unreadMessages, ...readMessages].map((messageDoc) => {
-  const messages = [...unreadMessages].map((messageDoc) => {
+  const readMessages = await Message.find({
+    recipient: userId,
+    read: true
+  }).sort({ createdAt: -1 })
+    .populate('sender', 'username')
+    .populate('property', 'name')
+    .lean();
+
+  const messages = [...unreadMessages, ...readMessages].map((messageDoc) => {
     const message = convertToSerializeableObject(messageDoc) as MessageType
     message.sender = convertToSerializeableObject(message.sender) as MessageType['sender']
     message.property = convertToSerializeableObject(message.property) as MessageType['property']
@@ -43,13 +50,13 @@ const MessagesPage = async () => {
           <h1 className='text-3xl font-bold mb-4'>Your Messages</h1>
 
           <div className='space-y-4'>
-            {messages.length > 0 ? (
+            { messages.length > 0 ? (
               messages.map((message) => (
-                <MessageCard key={message._id} message={message} />
+                <MessageCard key={ message._id } message={ message } />
               ))
             ) : (
               <p>You have no messages.</p>
-            )}
+            ) }
           </div>
         </div>
       </div>
