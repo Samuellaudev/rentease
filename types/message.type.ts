@@ -3,9 +3,13 @@ import { PropertyType } from "./property.type";
 
 export interface MessageType {
   _id: string;
-  sender: User["_id"];
+  sender: {
+    username: User["username"];
+  }
   recipient: User["_id"];
-  property: PropertyType["_id"];
+  property: {
+    name: PropertyType["name"]
+  };
   name: string;
   email: string;
   phone?: string;
