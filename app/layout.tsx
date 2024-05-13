@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/assets/styles/globals.css'
+import 'photoswipe/dist/photoswipe.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
