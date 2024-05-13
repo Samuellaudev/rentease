@@ -5,10 +5,18 @@ import { PropertyType } from '@/types/property.type';
 import PropertySearchForm from '@/components/Properties/PropertySearchForm'
 import Properties from '@/components/Properties/Properties';
 
-const PropertiesPage = async () => {
+const PropertiesPage = async ({
+  searchParams: { pageSize = 6, page = 1 }
+}) => {
   await connectDB()
 
-  const properties: PropertyType[] = await Property.find({})
+  const skip = (page - 1) * pageSize
+
+  const totalProperties = await Property.countDocuments({})
+  const properties: PropertyType[] = await Property
+    .find({})
+    .skip(skip)
+    .limit(pageSize)
 
   return (
     <>
@@ -17,7 +25,12 @@ const PropertiesPage = async () => {
           <PropertySearchForm />
         </div>
       </section>
-      <Properties properties={ properties }/>
+      <Properties
+        properties={ properties }
+        page={ page }
+        pageSize={ pageSize }
+        totalProperties={ totalProperties }
+      />
     </>
   );
 };

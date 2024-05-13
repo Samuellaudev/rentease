@@ -1,11 +1,20 @@
 import { PropertyType } from '@/types/property.type';
 import PropertyCard from '@/components/Properties/PropertyCard';
+import Pagination from '../Pagination';
 
 interface PropertiesProps {
   properties: PropertyType[]
+  page: number;
+  pageSize: number;
+  totalProperties: number;
 }
 
-const Properties = ({ properties }: PropertiesProps) => {
+const Properties = ({
+  properties,
+  page,
+  pageSize,
+  totalProperties
+}: PropertiesProps) => {
   return (
     <section className='px-4 py-6'>
     <div className='container-xl lg:container m-auto px-4 py-6'>
@@ -18,7 +27,12 @@ const Properties = ({ properties }: PropertiesProps) => {
           )) }
         </div>
       ) }
-    </div>
+      </div>
+      <Pagination
+        page={ page }
+        pageSize={ pageSize }
+        totalItems={ totalProperties }
+      />
   </section>
   )
 }
