@@ -9,6 +9,8 @@ import { getSessionUser } from '@/utils/getSessionUser';
 import { convertToSerializeableObject } from '@/utils/convertToObject';
 import MessageCard from '@/components/Message';
 
+export const dynamic = 'force-dynamic';
+
 const MessagesPage = async () => {
   await connectDB();
 

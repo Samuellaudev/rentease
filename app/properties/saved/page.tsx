@@ -10,6 +10,8 @@ interface Bookmarks {
   bookmarks: PropertyType[]
 }
 
+export const dynamic = 'force-dynamic';
+
 const SavedPropertiesPage = async () => {
   await connectDB();
 

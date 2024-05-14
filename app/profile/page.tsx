@@ -8,6 +8,8 @@ import Image from 'next/image';
 import profileDefault from '@/assets/images/profile.png';
 import ProfileProperties from '@/components/Properties/ProfileProperties';
 
+export const dynamic = 'force-dynamic';
+
 const ProfilePage = async () => {
   await connectDB();
 
