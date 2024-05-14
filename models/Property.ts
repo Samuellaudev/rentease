@@ -1,7 +1,7 @@
-import { Schema, model, models, Types } from 'mongoose';
+import { Schema, model, models, Types, Document, Model } from 'mongoose';
 import { Location, Rates, SellerInfo } from '@/types/property.type'
 
-export interface PropertyModel {
+export interface Property {
   owner: string | Types.ObjectId;
   name: string;
   type: string;
@@ -19,7 +19,11 @@ export interface PropertyModel {
   updatedAt: string;
 }
 
-const PropertySchema = new Schema<PropertyModel>(
+export interface PropertyDocument extends Property, Document {}
+
+export interface PropertyModel extends Model<PropertyDocument> {}
+
+const PropertySchema = new Schema<PropertyDocument, PropertyModel>(
   {
     owner: {
       type: Schema.Types.ObjectId,
@@ -109,6 +113,6 @@ const PropertySchema = new Schema<PropertyModel>(
   }
 );
 
-const Property = models.Property || model('Property', PropertySchema);
+const Property: PropertyModel = models.Property || model<PropertyDocument, PropertyModel>('Property', PropertySchema);
 
 export default Property;
