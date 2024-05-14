@@ -1,7 +1,18 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models, Document, Model } from 'mongoose';
 import { User as UserModel } from '@/types/user.type'
 
-const UserSchema = new Schema<UserModel>(
+export interface UserType {
+  email: string
+  username: string
+  image: string
+  bookmarks: Schema.Types.ObjectId
+}
+
+export interface UserTypeDocument extends UserType, Document {}
+
+export interface UserTypeModel extends Model<UserTypeDocument> {}
+
+const UserSchema = new Schema<UserTypeDocument, UserTypeModel>(
   {
     email: {
       type: String,
@@ -27,6 +38,6 @@ const UserSchema = new Schema<UserModel>(
   }
 );
 
-const User = models.User || model('User', UserSchema);
+const User: UserTypeModel = models.User || model<UserTypeDocument, UserTypeModel>('User', UserSchema);
 
 export default User;
