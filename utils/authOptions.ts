@@ -1,24 +1,11 @@
+import { NextAuthOptions } from "next-auth";
+import { Session, Profile } from "next-auth"
 import GoogleProvider from 'next-auth/providers/google';
 import User from '@/models/User';
 import connectDB from '@/config/db';
+import { User as UserType } from "@/types/user.type";
 
-export interface Profile {
-  profile: {
-    email: string;
-    name: string;
-    picture: string;
-  }
-}
-
-export interface Session {
-  session: {
-    user: {
-      email: string;
-      id: string;
-    }
-  }
-}
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -34,15 +21,15 @@ export const authOptions = {
   ],
   callbacks: {
     // Invoked on successful sign in
-    async signIn({profile}: Profile) {
+    async signIn({profile}) {
       await connectDB();
 
-      const { email, name, picture } = profile
+      const { email, name, picture } = profile as Profile
       const userExists = await User.findOne({ email: email });
 
       if (!userExists) {
         // Truncate user name if too long
-        const username = name.slice(0, 20);
+        const username = name!.slice(0, 20);
 
         await User.create({
           email: email,
@@ -53,8 +40,8 @@ export const authOptions = {
       return true;
     },
     // Session callback function that modifies the session object
-    async session({ session }: Session) {
-      const user = await User.findOne({ email: session.user.email });
+    async session({ session }: { session: Session}) {
+      const user = await User.findOne({ email: session.user.email }) as UserType
 
       session.user.id = user._id.toString();
 

@@ -16,10 +16,11 @@ interface PropertyProps {
 
 const BookmarkButton = ({ property }: PropertyProps) => {
   const { data: session } = useSession()
-  const userId: string | undefined = session?.user?.id
-
+  const userId: string = session?.user?.id!
+  
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     if (!userId) {
