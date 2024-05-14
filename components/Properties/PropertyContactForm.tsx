@@ -32,6 +32,7 @@ const PropertyContactForm = ({ property }: PropertyProps) => {
   const { data: session } = useSession();
 
   const initialState: MessageType = {
+    _id: '',
     sender: "",
     recipient: "",
     property: "",

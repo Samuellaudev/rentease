@@ -13,7 +13,7 @@ const PropertyAddForm = () => {
     if (!files) return;
 
     if (files.length > 4) {
-      e.target.value = '';
+      // e.target.value = '';
       toast.error('You can select up to 4 images in total.');
     }
   };

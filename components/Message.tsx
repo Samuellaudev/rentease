@@ -46,13 +46,13 @@ const MessageCard = ({ message }: MessageProp) => {
       ) : null}
       <h2 className='text-xl mb-4'>
         <span className='font-bold'>Property Inquiry:</span>{' '}
-        {message.property.name}
+        {typeof message.property === 'string' ? message.property : message.property.name}
       </h2>
       <p className='text-gray-700'>{message.body}</p>
 
       <ul className='mt-4'>
         <li>
-          <strong>Name:</strong> {message.sender.username}
+          <strong>Name:</strong> {typeof message.sender === 'string' ? message.sender : message.sender.username}
         </li>
 
         <li>

@@ -1,6 +1,21 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models, Document, Model } from 'mongoose';
 
-const MessageSchema = new Schema(
+export interface IMessage {
+  sender: Schema.Types.ObjectId;
+  recipient: Schema.Types.ObjectId;
+  property: Schema.Types.ObjectId;
+  name: string;
+  email: string;
+  phone?: string;
+  body?: string;
+  read?: boolean;
+}
+
+export interface IMessageDocument extends IMessage, Document {}
+
+export interface IMessageModel extends Model<IMessageDocument> {}
+
+const MessageSchema = new Schema<IMessageDocument, IMessageModel>(
   {
     sender: {
       type: Schema.Types.ObjectId,
@@ -41,6 +56,6 @@ const MessageSchema = new Schema(
   }
 );
 
-const Message = models.Message || model('Message', MessageSchema);
+const Message: IMessageModel = models.Message || model<IMessageDocument, IMessageModel>('Message', MessageSchema);
 
 export default Message;

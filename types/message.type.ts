@@ -1,16 +1,15 @@
-import { Document } from 'mongoose'; // To include 'save' method provided by Document 
 import { User } from "./user.type"; 
 import { PropertyType } from "./property.type";
 
-export interface MessageType extends Document {
+export interface MessageType {
   _id: string;
   sender: {
-    username: User["username"];
-  }
+    username: User["username"]
+  } | string
   recipient: User["_id"];
   property: {
     name: PropertyType["name"]
-  };
+  } | string
   name: string;
   email: string;
   phone?: string;
