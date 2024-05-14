@@ -42,7 +42,7 @@ const BookmarkButton = ({ property }: PropertyProps) => {
 
     bookmarkProperty(property._id).then((res) => {
       if (res.error) return toast.error(res.error);
-      setIsBookmarked(res.isBookmarked);
+      setIsBookmarked(res.isBookmarked!);
       toast.success(res.message);
     });
   };

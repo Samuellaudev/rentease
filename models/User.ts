@@ -5,7 +5,7 @@ export interface UserType {
   email: string
   username: string
   image: string
-  bookmarks: Schema.Types.ObjectId
+  bookmarks: string[]
 }
 
 export interface UserTypeDocument extends UserType, Document {}
