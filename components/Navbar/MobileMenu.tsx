@@ -27,7 +27,7 @@ const MobileMenu = ({
   session
 }: MobileMenuProp) => {
   const linkClasses = clsx(
-    'group relative z-10 text-slate-700 flex items-center py-1 hover:bg-cyan-500 group-hover:text-white rounded-md transition duration-300'
+    'group relative z-10 text-slate-700 flex items-center py-1 hover:bg-primary group-hover:text-white rounded-md transition duration-300'
   );
 
   return (
@@ -68,7 +68,7 @@ const MobileMenu = ({
           </SheetTitle>
         </SheetHeader>
         <div className='' id='mobile-menu'>
-          <div className='space-y-2 px-2 pb-3 ml-2'>
+          <div className='space-y-2 px-2 pb-3 ml-2 mb-2'>
             { navLinks.map(item => (
               <div key={ item.title } className="group z-0" >
                 <Link
@@ -91,7 +91,6 @@ const MobileMenu = ({
                 </Link>
               </div>
             ) : null }
-            { !session ? <Login /> : null }
             <div className="group mt-2 z-0" >
               <Link
                 href='/faq'
@@ -115,7 +114,9 @@ const MobileMenu = ({
                 </a>
               )) }
             </div>
+
           </div>
+            { !session ? <Login /> : null }
         </div>
       </SheetContent>
     </Sheet>

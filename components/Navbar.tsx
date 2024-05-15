@@ -25,7 +25,7 @@ const Navbar = () => {
 
           {/* <!-- Right Side Menu (Logged Out) --> */ }
           { !session ?
-            <div className='hidden md:block text-cyan-600 mr-2' >
+            <div className='hidden md:block text-primary mr-2' >
               <Login />
             </div>
             : null }
