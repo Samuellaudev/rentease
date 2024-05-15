@@ -2,10 +2,20 @@
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 
 const PropertySearchForm = () => {
   const [location, setLocation] = useState('');
-  const [propertyType, setPropertyType] = useState('All');
+  const [propertyType, setPropertyType] = useState('');
 
   const router = useRouter()
 
@@ -39,29 +49,33 @@ const PropertySearchForm = () => {
         />
       </div>
       <div className='w-full md:w-2/5 md:pl-2'>
-        <label htmlFor='property-type' className='sr-only'>
-          Property Type
-        </label>
-        <select
-          id='property-type'
-          className='w-full px-4 py-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring focus:ring-blue-500'
+        <Label htmlFor="property-type" className='sr-only'>Property Type</Label>
+        <Select
           value={ propertyType }
-          onChange={ (e) => setPropertyType(e.target.value) }
+          onValueChange={ setPropertyType }
         >
-          <option value='All'>All</option>
-          <option value='Apartment'>Apartment</option>
-          <option value='Studio'>Studio</option>
-          <option value='Condo'>Condo</option>
-          <option value='House'>House</option>
-          <option value='Cabin Or Cottage'>Cabin or Cottage</option>
-          <option value='Loft'>Loft</option>
-          <option value='Room'>Room</option>
-          <option value='Other'>Other</option>
-        </select>
+          <SelectTrigger className='w-full px-4 py-[23px] rounded-lg bg-white text-gray-800 focus:outline-none focus:ring focus:ring-cyan-500'>
+            <SelectValue className='text-gray-300' placeholder="Select Property Type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Property Type</SelectLabel>
+              <SelectItem value='All'>All</SelectItem>
+              <SelectItem value='Apartment'>Apartment</SelectItem>
+              <SelectItem value='Studio'>Studio</SelectItem>
+              <SelectItem value='Condo'>Condo</SelectItem>
+              <SelectItem value='House'>House</SelectItem>
+              <SelectItem value='Cabin Or Cottage'>Cabin or Cottage</SelectItem>
+              <SelectItem value='Loft'>Loft</SelectItem>
+              <SelectItem value='Room'>Room</SelectItem>
+              <SelectItem value='Other'>Other</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
       <button
         type='submit'
-        className='md:ml-4 mt-4 md:mt-0 w-full md:w-auto px-6 py-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500'
+        className='md:ml-4 mt-4 md:mt-0 w-full md:w-auto px-6 py-3 rounded-lg bg-cyan-400 text-white hover:bg-cyan-600 focus:outline-none focus:ring focus:ring-cyan-600 transition duration-300'
       >
         Search
       </button>
