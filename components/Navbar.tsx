@@ -24,7 +24,11 @@ const Navbar = () => {
           <DesktopMenu session={ session! } />
 
           {/* <!-- Right Side Menu (Logged Out) --> */ }
-          { !session ? <Login /> : null }
+          { !session ?
+            <div className='hidden md:block text-cyan-600 mr-2' >
+              <Login />
+            </div>
+            : null }
 
           {/* <!-- Right Side Menu (Logged In) --> */ }
           { session ? (

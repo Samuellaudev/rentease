@@ -1,9 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image';
 import { Session } from 'next-auth';
 import clsx from 'clsx';
 
 import Login from './Login';
-import { navLinks } from '@/utils/constants';
+import { navLinks, socialLinks } from '@/utils/constants';
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -13,6 +14,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { Separator } from "@/components/ui/separator"
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { GoQuestion } from "react-icons/go";
+import logo from '@/assets/images/logo.png';
 
 interface MobileMenuProp {
   session: Session,
@@ -22,12 +27,9 @@ const MobileMenu = ({
   session
 }: MobileMenuProp) => {
   const linkClasses = clsx(
-    'relative z-10 text-slate-700'
+    'group relative z-10 text-slate-700 flex items-center py-1 hover:bg-cyan-500 group-hover:text-white rounded-md transition duration-300'
   );
 
-  const underlineClasses = clsx(
-    'absolute w-full z-20 mt-0.5 duration-500 border-b-2 opacity-0 border-slate-700 group-hover:opacity-100',
-  );
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -59,7 +61,11 @@ const MobileMenu = ({
       </SheetTrigger>
       <SheetContent side='left'>
         <SheetHeader>
-          <SheetTitle>RentEase</SheetTitle>
+          <SheetTitle className='mx-auto'>
+            <Link className='flex flex-shrink-0 items-center' href='/'>
+              <Image className='h-22 w-auto' src={ logo } alt='RentEase' />
+            </Link>
+          </SheetTitle>
         </SheetHeader>
         <div className='' id='mobile-menu'>
           <div className='space-y-2 px-2 pb-3 ml-2'>
@@ -69,8 +75,8 @@ const MobileMenu = ({
                   href={ item.href }
                   className={ `${ linkClasses }` }
                 >
+                  { item.icon }
                   <SheetClose>{ item.title }</SheetClose>
-                  <div className={ underlineClasses }></div>
                 </Link>
               </div>
             )) }
@@ -80,12 +86,35 @@ const MobileMenu = ({
                   href='/properties/add'
                   className={ `${ linkClasses }` }
                 >
+                  <IoIosAddCircleOutline className='text-black text-xl mx-2 group-hover:text-white' />
                   <SheetClose>Add Property</SheetClose>
-                  <div className={ underlineClasses }></div>
                 </Link>
               </div>
             ) : null }
             { !session ? <Login /> : null }
+            <div className="group mt-2 z-0" >
+              <Link
+                href='/faq'
+                className={ `${ linkClasses }` }
+              >
+                <GoQuestion className='text-black text-xl mx-2 group-hover:text-white' />
+                <SheetClose>FAQ</SheetClose>
+              </Link>
+            </div>
+            <Separator className="my-4 mx-2" />
+            <div className="flex flex-row gap-2 space-x-7 mx-2 pt-2">
+              { socialLinks.map((link, index) => (
+                <a href={ link.href } key={ index } target="_blank">
+                  <Image
+                    src={ link.src }
+                    alt={ link.alt }
+                    width={ 20 }
+                    height={ 20 }
+                    className="duration-200 hover:invert-0 hover:sepia-0 hover:saturate-2 hover:hue-rotate-[184deg] hover:brightness-[110%] hover:contrast-[101%]"
+                  />
+                </a>
+              )) }
+            </div>
           </div>
         </div>
       </SheetContent>

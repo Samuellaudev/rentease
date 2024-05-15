@@ -1,15 +1,13 @@
 import AuthProvider from '@/components/AuthProvider';
 import { GlobalProvider } from '@/contexts/GlobalContext';
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { poppins } from '@/components/fonts';
 import Navbar from '@/components/Navbar';
 import Footer from "@/components/Footer";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/assets/styles/globals.css'
 import 'photoswipe/dist/photoswipe.css';
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "RentEase",
@@ -25,7 +23,7 @@ export default function RootLayout({
     <AuthProvider>
       <GlobalProvider>
         <html lang="en">
-          <body className={ inter.className }>
+          <body className={ poppins.className }>
             <Navbar />
             <main>{ children }</main>
             <Footer />

@@ -24,16 +24,13 @@ const DesktopMenu = ({
     <div className='flex flex-1 items-center justify-center md:items-stretch md:justify-start'>
       {/* <!-- Logo --> */ }
       <Link className='flex flex-shrink-0 items-center' href='/'>
-        <Image className='h-16 w-auto' src={ logo } alt='RentEase' />
-        <span className='hidden md:block text-slate-700 text-2xl font-bold ml-2'>
-          RentEase
-        </span>
+        <Image className='h-22 w-auto' src={ logo } alt='RentEase' />
       </Link>
       {/* <!-- Desktop Menu Hidden below md screens --> */ }
-      <div className='hidden md:ml-6 md:block'>
-        <div className='flex space-x-6 items-center justify-center'>
+      <div className='hidden md:ml-6 md:block '>
+        <div className='flex space-x-6 pt-1'>
           { navLinks.map(item => (
-            <div key={ item.title } className="group mt-2 z-0" >
+            <div key={ item.title } className="group mt-2 z-0 flex items-center" >
               <Link
                 href={ item.href }
                 className={ `${ linkClasses }` }
@@ -44,7 +41,7 @@ const DesktopMenu = ({
             </div>
           )) }
           { session ? (
-            <div className="group mt-2 z-0" >
+            <div className="group mt-2 z-0 flex items-center" >
               <Link
                 href='/properties/add'
                 className={ `${ linkClasses }` }
