@@ -34,10 +34,10 @@ const MobileMenu = ({
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          variant='outline'
+          variant='ghost'
           type='button'
           id='mobile-dropdown-button'
-          className='relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
+          className='relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white'
           aria-controls='mobile-menu'
           aria-expanded='false'
         >
@@ -99,9 +99,9 @@ const MobileMenu = ({
                 <GoQuestion className='text-black text-xl mx-2 group-hover:text-white' />
                 <SheetClose>FAQ</SheetClose>
               </Link>
+            <Separator className="my-4" />
             </div>
-            <Separator className="my-4 mx-2" />
-            <div className="flex flex-row gap-2 space-x-7 mx-2 pt-2">
+            <div className="flex flex-row gap-2 space-x-8 mx-2 pt-2">
               { socialLinks.map((link, index) => (
                 <a href={ link.href } key={ index } target="_blank">
                   <Image
