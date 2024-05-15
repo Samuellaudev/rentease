@@ -23,9 +23,9 @@ export default function RootLayout({
     <AuthProvider>
       <GlobalProvider>
         <html lang="en">
-          <body className={ poppins.className }>
+          <body className={`${ poppins.className } flex flex-col min-h-screen`}>
             <Navbar />
-            <main className="mt-20 mx-auto">{ children }</main>
+            <main className="mt-20 mx-auto flex-grow w-full">{ children }</main>
             <Footer />
             <ToastContainer />
           </body>
