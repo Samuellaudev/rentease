@@ -32,7 +32,7 @@ const Navbar = () => {
 
           {/* <!-- Right Side Menu (Logged In) --> */ }
           { session ? (
-            <div className='absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0'>
+            <div className='absolute inset-y-0 right-0 flex items-center space-x-1 md:static md:inset-auto md:ml-6 md:pr-0'>
               <Link href='/messages' className='relative group'>
                 <button
                   type='button'
