@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { signOut, useSession} from 'next-auth/react';
+import { usePathname } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
 
 import UnreadMessageCount from './UnreadMessageCount';
 import ProfileDropdown from './Navbar/ProfileDropdown';
@@ -13,18 +14,19 @@ const Navbar = () => {
   const { data: session } = useSession()
   const profileImage = session?.user?.image!;
 
+  const pathname = usePathname()
   return (
     <nav className="fixed mx-auto text-slate-600 top-0 left-0 right-0 z-[20] bg-white bg-opacity-80 backdrop-blur-md backdrop-opacity-80">
       <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
         <div className='relative flex h-20 items-center justify-between'>
           <div className='absolute inset-y-0 left-0 flex items-center md:hidden'>
-            <MobileMenu session={ session! }/>
+            <MobileMenu session={ session! } />
           </div>
 
           <DesktopMenu session={ session! } />
 
           {/* <!-- Right Side Menu (Logged Out) --> */ }
-          { !session ?
+          { !session && pathname !== '/signIn' ?
             <div className='hidden md:block text-primary mr-2' >
               <Login />
             </div>

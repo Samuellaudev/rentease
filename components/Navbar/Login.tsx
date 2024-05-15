@@ -23,7 +23,7 @@ const Login = () => {
         Object.values(providers).map((provider) => (
           <button
             key={ provider.name }
-            onClick={ () => signIn(provider.id) }
+            onClick={ () => signIn(provider.id, { callbackUrl: '/' }) }
             className='flex items-center text-white bg-primary hover:bg-cyan-600 hover:text-white rounded-md px-3 py-2'
           >
             <FaGoogle className='text-white mr-2' />

@@ -11,23 +11,21 @@ const InfoBoxes = () => {
             buttonInfo={{
               text: 'Browse Properties',
               link: '/properties',
-              backgroundColor: 'bg-black',
+              backgroundColor: 'bg-slate-700',
             }}
           >
-            Find your dream rental property. Bookmark properties and contact
-            owners.
+            Search for your perfect rental. Save preferred listings and connect with property owners effortlessly.
           </InfoBox>
           <InfoBox
             heading='For Property Owners'
-            backgroundColor='bg-blue-100'
+            backgroundColor='bg-cyan-100'
             buttonInfo={{
               text: 'Add Property',
               link: '/properties/add',
-              backgroundColor: 'bg-blue-500',
+              backgroundColor: 'bg-primary',
             }}
           >
-            List your properties and reach potential tenants. Rent as an Airbnb
-            or long term.
+            Showcase your properties to attract potential tenants. Rent for short-term stays or long-term leases.
           </InfoBox>
         </div>
       </div>
