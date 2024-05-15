@@ -5,6 +5,15 @@ import { PropertyType } from '@/types/property.type';
 import PropertySearchForm from '@/components/Properties/PropertySearchForm'
 import Properties from '@/components/Properties/Properties';
 
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+
 const PropertiesPage = async ({
   searchParams: { pageSize = 6, page = 1 }
 }) => {
@@ -18,6 +27,22 @@ const PropertiesPage = async ({
     .skip(skip)
     .limit(pageSize) as PropertyType[]
 
+  const breadcrumbArea = (
+    <Breadcrumb className='container mt-4'>
+      <BreadcrumbList>
+        <BreadcrumbItem className='text-base'>
+          <BreadcrumbLink
+            href="/">Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator className='text-base' />
+        <BreadcrumbItem className='text-base'>
+          <BreadcrumbPage>Properties</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+
   return (
     <>
       <section className='bg-primary py-4'>
@@ -25,6 +50,7 @@ const PropertiesPage = async ({
           <PropertySearchForm />
         </div>
       </section>
+      { breadcrumbArea }
       <Properties
         properties={ properties }
         page={ page }
