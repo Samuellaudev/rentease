@@ -14,7 +14,7 @@ const Navbar = () => {
   const profileImage = session?.user?.image!;
 
   return (
-    <nav className='bg-white border-b border-blue-500 text-slate-600'>
+    <nav className="fixed mx-auto text-slate-600 top-0 left-0 right-0 z-[20] bg-white bg-opacity-80 backdrop-blur-md backdrop-opacity-80">
       <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
         <div className='relative flex h-20 items-center justify-between'>
           <div className='absolute inset-y-0 left-0 flex items-center md:hidden'>

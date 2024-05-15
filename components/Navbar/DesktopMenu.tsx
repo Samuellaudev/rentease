@@ -27,8 +27,8 @@ const DesktopMenu = ({
         <Image className='h-22 w-auto' src={ logo } alt='RentEase' />
       </Link>
       {/* <!-- Desktop Menu Hidden below md screens --> */ }
-      <div className='hidden md:ml-6 md:block '>
-        <div className='flex space-x-6 pt-1'>
+      <div className='hidden md:ml-6 md:block my-auto'>
+        <div className='flex space-x-6'>
           { navLinks.map(item => (
             <div key={ item.title } className="group mt-2 z-0 flex items-center" >
               <Link
