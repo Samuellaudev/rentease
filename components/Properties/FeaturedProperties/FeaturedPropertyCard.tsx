@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { PropertyType } from '@/types/property.type';
 import {
   FaBed,
   FaBath,
@@ -7,7 +8,14 @@ import {
   FaMoneyBill,
   FaMapMarker,
 } from 'react-icons/fa';
-import { PropertyType } from '@/types/property.type';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from '@/components/ui/separator';
 
 interface PropertyProp {
   property: PropertyType
@@ -27,7 +35,7 @@ const FeaturedPropertyCard = ({ property }: PropertyProp) => {
   };
 
   return (
-    <div className='bg-white rounded-xl shadow-md relative flex flex-col md:flex-row'>
+    <Card className='bg-white rounded-xl shadow-md relative flex flex-col md:flex-row hover:-translate-y-1 duration-300'>
       <Image
         src={ property.images[0] }
         alt=''
@@ -36,12 +44,13 @@ const FeaturedPropertyCard = ({ property }: PropertyProp) => {
         sizes='100vw'
         className='object-cover rounded-t-xl md:rounded-tr-none md:rounded-l-xl w-full md:w-2/5'
       />
-      <div className='p-6'>
-        <h3 className='text-xl font-bold'>{ property.name }</h3>
-        <div className='text-gray-600 mb-4'>{ property.type }</div>
-        <h3 className='absolute top-[10px] left-[10px] bg-white px-4 py-2 rounded-lg text-blue-500 font-bold text-right md:text-center lg:text-right'>
+      <CardContent className='p-6 w-full'>
+        <CardTitle className='text-xl font-bold'>{ property.name }</CardTitle>
+        <CardDescription className='text-gray-600 mt-1 mb-4'>{ property.type }</CardDescription>
+        <h3 className='absolute top-[10px] left-[10px] bg-white px-4 py-2 rounded-lg text-primary font-bold text-right md:text-center lg:text-right'>
           ${ getRateDisplay() }
         </h3>
+
         <div className='flex justify-center gap-4 text-gray-500 mb-4'>
           <p>
             <FaBed className='inline-block mr-2' /> { property.beds }{ ' ' }
@@ -64,13 +73,11 @@ const FeaturedPropertyCard = ({ property }: PropertyProp) => {
               <FaMoneyBill className='inline mr-2' /> Nightly
             </p>
           ) }
-
           { property.rates.weekly && (
             <p>
               <FaMoneyBill className='inline mr-2' /> Weekly
             </p>
           ) }
-
           { property.rates.monthly && (
             <p>
               <FaMoneyBill className='inline mr-2' /> Monthly
@@ -78,10 +85,10 @@ const FeaturedPropertyCard = ({ property }: PropertyProp) => {
           ) }
         </div>
 
-        <div className='border border-gray-200 mb-5'></div>
+        <Separator className="my-4" />
 
-        <div className='flex flex-col lg:flex-row justify-between'>
-          <div className='flex align-middle gap-2 mb-4 lg:mb-0'>
+        <CardFooter className='flex flex-row justify-between'>
+          <div className='flex align-middle gap-2 mb-0'>
             <FaMapMarker className='text-lg text-orange-700' />
             <span className='text-orange-700'>
               { property.location.city } { property.location.state }
@@ -89,13 +96,14 @@ const FeaturedPropertyCard = ({ property }: PropertyProp) => {
           </div>
           <Link
             href={ `/properties/${ property._id }` }
-            className='h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm'
+            className='h-[36px] bg-primary hover:bg-cyan-600 text-white px-4 py-2 rounded-lg text-center text-sm'
           >
             Details
           </Link>
-        </div>
-      </div>
-    </div>
+        </CardFooter>
+      </CardContent>
+    </Card>
   );
 };
+
 export default FeaturedPropertyCard;
