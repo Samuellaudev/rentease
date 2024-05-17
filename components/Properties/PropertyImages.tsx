@@ -42,8 +42,8 @@ const PropertyImages = ({ images }: Images) => {
                     }` }
                 >
                   <Item
-                    original={ images[0] }
-                    thumbnail={ images[0] }
+                    original={ image }
+                    thumbnail={ image }
                     width='1000'
                     height='600'
                   >
