@@ -1,7 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaBed, FaBath, FaRulerCombined, FaMoneyBill } from 'react-icons/fa';
+import {
+  FaBed,
+  FaBath,
+  FaRulerCombined,
+  FaMoneyBill,
+  FaMapMarker,
+} from 'react-icons/fa';
 import { PropertyType } from '@/types/property.type';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from '@/components/ui/separator';
 
 interface PropertyProp {
   property: PropertyType
@@ -21,7 +35,7 @@ const PropertyCard = ({ property }: PropertyProp) => {
   };
 
   return (
-    <div className='rounded-xl shadow-md relative'>
+    <Card className='rounded-xl shadow-md relative'>
       <Image
         src={property.images[0]}
         alt=''
@@ -30,12 +44,12 @@ const PropertyCard = ({ property }: PropertyProp) => {
         sizes='100vw'
         className='w-full h-auto rounded-t-xl'
       />
-      <div className='p-4'>
+      <CardContent className='p-6'>
         <div className='text-left md:text-center lg:text-left mb-6'>
-          <div className='text-gray-600'>{ property.type }</div>
-          <h3 className='text-xl font-bold'>{ property.name }</h3>
+          <CardDescription className='text-gray-600'>{ property.type }</CardDescription>
+          <CardTitle className='text-xl font-bold'>{ property.name }</CardTitle>
         </div>
-        <h3 className='absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-blue-500 font-bold text-right md:text-center lg:text-right'>
+        <h3 className='absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-primary font-bold text-right md:text-center lg:text-right'>
           { getRateDisplay() }
         </h3>
 
@@ -73,24 +87,25 @@ const PropertyCard = ({ property }: PropertyProp) => {
           ) }
         </div>
 
-        <div className='border border-gray-100 mb-5'></div>
+        <Separator className="my-4" />
 
-        <div className='flex flex-col lg:flex-row justify-between mb-4'>
-          <div className='flex align-middle gap-2 mb-4 lg:mb-0'>
-            <i className='fa-solid fa-location-dot text-lg text-orange-700'></i>
+        <CardFooter className='flex flex-row justify-between'>
+          <div className='flex align-middle gap-2 lg:mb-0'>
+            <FaMapMarker className='text-lg text-orange-700' />
             <span className='text-orange-700'>
               { property.location.city }, { property.location.state }
             </span>
           </div>
           <Link
             href={ `/properties/${ property._id }` }
-            className='h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm'
+            className='h-[36px] bg-primary hover:bg-cyan-600 text-white px-4 py-2 rounded-lg text-center text-sm'
           >
             Details
           </Link>
-        </div>
-      </div>
-    </div>
+        </CardFooter>
+      </CardContent>
+    </Card>
   );
 };
+
 export default PropertyCard;
