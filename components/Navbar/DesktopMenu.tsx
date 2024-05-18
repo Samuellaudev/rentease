@@ -24,7 +24,7 @@ const DesktopMenu = ({
     <div className='flex flex-1 items-center justify-center md:items-stretch md:justify-start'>
       {/* <!-- Logo --> */ }
       <Link className='flex flex-shrink-0 items-center' href='/'>
-        <Image className='h-22 w-auto' src={ logo } alt='RentEase' />
+        <Image className='w-20 md:w-24' src={ logo } alt='RentEase' />
       </Link>
       {/* <!-- Desktop Menu Hidden below md screens --> */ }
       <div className='hidden md:ml-6 md:block my-auto'>

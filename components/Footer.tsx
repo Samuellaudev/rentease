@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="flex flex-col items-center text-center">
           <Link href='/' className="cursor-pointer">
             <Image
-              className="w-auto h-30 -mt-4"
+              className="w-20 md:w-24 -mt-4"
               src={ logo }
               alt="Logo"
             />

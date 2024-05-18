@@ -85,7 +85,7 @@ const MessageCard = ({ message }: MessageProp) => {
         </ul>
         <Button
           onClick={ handleReadClick }
-          className={ `mt-4 mr-3 ${ isRead ? 'bg-gray-300' : 'bg-cyan-600 text-white'
+          className={ `mt-4 mr-3 ${ isRead ? 'bg-gray-300 hover:bg-gray-400' : 'bg-cyan-600 text-white'
             } py-2 px-3 rounded-md cursor-pointer` }
         >
           { isRead ? 'Mark As New' : 'Mark As Read' }

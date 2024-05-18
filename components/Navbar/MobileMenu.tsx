@@ -27,7 +27,7 @@ const MobileMenu = ({
   session
 }: MobileMenuProp) => {
   const linkClasses = clsx(
-    'group relative z-10 text-slate-700 flex items-center py-1 hover:bg-primary group-hover:text-white rounded-md transition duration-300'
+    'group relative z-10 text-slate-700 flex items-center py-1 focus:outline-none hover:bg-primary group-hover:text-white rounded-md transition duration-300'
   );
 
   return (
@@ -63,7 +63,7 @@ const MobileMenu = ({
         <SheetHeader>
           <SheetTitle className='mx-auto'>
             <Link className='flex flex-shrink-0 items-center' href='/'>
-              <Image className='h-22 w-auto' src={ logo } alt='RentEase' />
+              <Image className='w-20 md:w-24' src={ logo } alt='RentEase' />
             </Link>
           </SheetTitle>
         </SheetHeader>
