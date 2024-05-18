@@ -14,10 +14,6 @@ import BookmarkButton from '@/components/Properties/BookmarkButton';
 import ShareButtons from '@/components/Properties/ShareButtons';
 
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
-  const PUBLIC_DOMAIN = process.env.VERCEL_URL
-    ? `https://${ process.env.VERCEL_URL }`
-    : 'http://localhost:3000';
-
   await connectDB();
 
   const propertyDoc: PropertyType | null = await Property.findById(params.id).lean();
@@ -51,7 +47,7 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
             <PropertyDetails property={ property } />
             <aside className='space-y-4'>
               <BookmarkButton property={ property } />
-              <ShareButtons property={ property } PUBLIC_DOMAIN={ PUBLIC_DOMAIN } />
+              <ShareButtons property={ property } />
               <PropertyContactForm property={ property } />
             </aside>
           </div>

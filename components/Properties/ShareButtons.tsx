@@ -14,13 +14,12 @@ import { PropertyType } from '@/types/property.type';
 
 interface PropertyProps {
   property: PropertyType
-  PUBLIC_DOMAIN: string
 }
 
 const ShareButtons = (
-  { property, PUBLIC_DOMAIN }: PropertyProps
+  { property }: PropertyProps
 ) => {
-  const shareUrl = `${ PUBLIC_DOMAIN }/properties/${ property._id }`;
+  const shareUrl = `${ process.env.NEXT_PUBLIC_DOMAIN }/properties/${ property._id }`;
 
   return (
     <>
