@@ -7,6 +7,15 @@ import markMessageAsRead from '@/app/actions/message/markMessageAsRead';
 import deleteMessage from '@/app/actions/message/deleteMessage';
 import { toast } from 'react-toastify';
 
+import { AlertModal } from './AlertModal';
+import { Button } from './ui/button';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardTitle,
+} from "@/components/ui/card"
+
 interface MessageProp {
   message: MessageType
 }
@@ -22,7 +31,7 @@ const MessageCard = ({ message }: MessageProp) => {
 
     setIsRead(read);
     setUnreadCount((prevCount) => (read ? prevCount - 1 : prevCount + 1));
-    toast.success(`Marked as ${read ? 'read' : 'new'}`);
+    toast.success(`Marked as ${ read ? 'read' : 'new' }`);
   };
 
   const handleDeleteClick = async () => {
@@ -38,55 +47,60 @@ const MessageCard = ({ message }: MessageProp) => {
   }
 
   return (
-    <div className='relative bg-white p-4 rounded-md shadow-md border border-gray-200'>
-      {!isRead ? (
+    <Card className='relative bg-white rounded-md shadow-md border border-gray-200'>
+      { !isRead ? (
         <div className='absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-md'>
           New
         </div>
-      ) : null}
-      <h2 className='text-xl mb-4'>
-        <span className='font-bold'>Property Inquiry:</span>{' '}
-        {typeof message.property === 'string' ? message.property : message.property.name}
-      </h2>
-      <p className='text-gray-700'>{message.body}</p>
+      ) : null }
 
-      <ul className='mt-4'>
-        <li>
-          <strong>Name:</strong> {typeof message.sender === 'string' ? message.sender : message.sender.username}
-        </li>
-
-        <li>
-          <strong>Reply Email:</strong>{' '}
-          <a href={`mailto:${message.email}`} className='text-blue-500'>
-            {message.email}
-          </a>
-        </li>
-        <li>
-          <strong>Reply Phone:</strong>{' '}
-          <a href={`tel:${message.phone}`} className='text-blue-500'>
-            {message.phone}
-          </a>
-        </li>
-        <li>
-          <strong>Received:</strong>{' '}
-          {new Date(message.createdAt).toLocaleString()}
-        </li>
-      </ul>
-      <button
-        onClick={handleReadClick}
-        className={`mt-4 mr-3 ${
-          isRead ? 'bg-gray-300' : 'bg-blue-500 text-white'
-        } py-1 px-3 rounded-md`}
-      >
-        {isRead ? 'Mark As New' : 'Mark As Read'}
-      </button>
-      <button
-        onClick={handleDeleteClick}
-        className='mt-4 bg-red-500 text-white py-1 px-3 rounded-md'
-      >
-        Delete
-      </button>
-    </div>
+      <CardHeader className='text-xl mb-4'>
+        <span className='font-medium'>Property Inquiry:</span>{ ' ' }
+        <CardTitle>
+          { typeof message.property === 'string' ? message.property : message.property.name }
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className='text-gray-700'>{ message.body }</p>
+        <ul className='mt-4'>
+          <li>
+            <strong>Name:</strong> { typeof message.sender === 'string' ? message.sender : message.sender.username }
+          </li>
+          <li>
+            <strong>Reply Email:</strong>{ ' ' }
+            <a href={ `mailto:${ message.email }` } className='text-primary'>
+              { message.email }
+            </a>
+          </li>
+          <li>
+            <strong>Reply Phone:</strong>{ ' ' }
+            <a href={ `tel:${ message.phone }` } className='text-primary'>
+              { message.phone }
+            </a>
+          </li>
+          <li>
+            <strong>Received:</strong>{ ' ' }
+            { new Date(message.createdAt).toLocaleString() }
+          </li>
+        </ul>
+        <Button
+          onClick={ handleReadClick }
+          className={ `mt-4 mr-3 ${ isRead ? 'bg-gray-300' : 'bg-cyan-600 text-white'
+            } py-2 px-3 rounded-md cursor-pointer` }
+        >
+          { isRead ? 'Mark As New' : 'Mark As Read' }
+        </Button>
+        <AlertModal
+          variantType='destructive'
+          dialogContent={ {
+            triggerWord: 'Delete',
+            title: 'Are you sure you want to delete this message?',
+            description: 'This action cannot be undone. This will permanently delete this message from our servers.'
+          } }
+          onClick={ handleDeleteClick }
+        />
+      </CardContent>
+    </Card>
   );
 };
 export default MessageCard;
