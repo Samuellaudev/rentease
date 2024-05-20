@@ -11,7 +11,7 @@ const SignInPage = () => {
       </div>
       <div className=" w-full py-8 md:px-8 lg:w-full">
         <div className="flex justify-center mx-auto">
-          <Image className='h-22 w-auto' src={ logo } alt='RentEase' />
+          <Image className='w-20 md:w-24' src={ logo } alt='RentEase' />
         </div>
         <p className="mt-3 mb-10 text-xl text-center text-gray-600 dark:text-gray-200">
           Welcome back!
