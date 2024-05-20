@@ -35,7 +35,7 @@ const PropertyCard = ({ property }: PropertyProp) => {
   };
 
   return (
-    <Card className='rounded-xl shadow-md relative'>
+    <Card className='rounded-xl shadow-md relative hover:drop-shadow-xl hover:-translate-y-1 duration-300'>
       <Image
         src={property.images[0]}
         alt=''
