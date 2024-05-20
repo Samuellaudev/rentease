@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/sheet"
 import { Separator } from "@/components/ui/separator"
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { GoQuestion } from "react-icons/go";
 import logo from '@/assets/images/logo.png';
 
 interface MobileMenuProp {
@@ -91,16 +90,7 @@ const MobileMenu = ({
                 </Link>
               </div>
             ) : null }
-            <div className="group mt-2 z-0" >
-              <Link
-                href='/faq'
-                className={ `${ linkClasses }` }
-              >
-                <GoQuestion className='text-black text-xl mx-2 group-hover:text-white' />
-                <SheetClose>FAQ</SheetClose>
-              </Link>
             <Separator className="my-4" />
-            </div>
             <div className="flex flex-row gap-2 space-x-8 mx-2 pt-2">
               { socialLinks.map((link, index) => (
                 <a href={ link.href } key={ index } target="_blank">

@@ -1,4 +1,5 @@
 import { IoHomeOutline, IoSearchCircleOutline } from "react-icons/io5";
+import { GoQuestion } from "react-icons/go";
 
 // Navbar
 export const navLinks = [
@@ -11,6 +12,11 @@ export const navLinks = [
     href: '/properties',
     title: 'Properties',
     icon: <IoSearchCircleOutline className='text-black text-xl mx-2 group-hover:text-white' />
+  },
+  {
+    href: '/faq',
+    title: 'FAQ',
+    icon: <GoQuestion className='text-black text-xl mx-2 group-hover:text-white' />
   }
 ]
 
